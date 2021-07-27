@@ -8,12 +8,13 @@
     <title>{{ $forums->name}}</title>
 </head>
 <body>
-    <hr />
+    
     <h1>{{$forums->name}}</h1>
+    <hr />
     @foreach($forums->threads as $thread)
         <div>
             <h4>{{$thread->title}}</h4>
-            <p>{{$thread->post_count}}</p>
+            <p>{{$thread->post_count()}}</p>
         </div>
     @endforeach
 </body>

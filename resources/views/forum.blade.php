@@ -399,7 +399,7 @@
     <h1>{{$category->name}}</h1>
     @foreach($category->forums as $forum)
         <div>
-            <h3>{{$forum->name}}</h3>
+            <h3><a href={{"/forum/$forum->id"}}>{{$forum->name}}</a></h3>
             <p>{{$forum->description}}</p>
             <small>{{$forum->threads->count()}}</small>
 
