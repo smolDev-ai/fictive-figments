@@ -14,7 +14,6 @@ class ForumController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -47,7 +46,7 @@ class ForumController extends Controller
     public function show($id)
     {
         return view("threads", [
-            "forums" => Forum::with("threads", "category", "threads.posts")->find($id),
+            "forums" => Forum::with("threads")->find($id),
         ]);
     }
 

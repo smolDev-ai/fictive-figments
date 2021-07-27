@@ -29,4 +29,9 @@ class Thread extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function post_count()
+    {
+        return $this->posts->count();
+    }
 }

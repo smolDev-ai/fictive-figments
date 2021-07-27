@@ -15,9 +15,8 @@ class CategoryController extends Controller
     public function index()
     {
         return view("forum", [
-            "categories" => Category::with("forums", "forums.threads", "forums.threads.posts")->get(),
+            "categories" => Category::with("forums")->get(),
         ]);
-
     }
 
     /**
