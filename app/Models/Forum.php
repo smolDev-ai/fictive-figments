@@ -29,4 +29,9 @@ class Forum extends Model
     {
         return $this->belongsTo(Forum::class, "parent_forum");
     }
+
+    public function thread_count()
+    {
+        return $this->threads->count();
+    }
 }

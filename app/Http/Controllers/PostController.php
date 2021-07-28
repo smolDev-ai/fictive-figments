@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
@@ -23,7 +26,6 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -34,7 +36,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $thread_id = substr(url()->previous(), -strlen($request['thread_id']));
+
+        if (! $thread_id == substr(url()->previous(), -strlen($request['thread_id']))) {
+            return ValidationException::withMessages(["thread_err" => "You can't post to this thread."]);
+        } else {
+            $post = [
+                "body" => $request['body'],
+                "thread_id" => $thread_id,
+                "author" => $request->user()->id,
+                "posted_on" => new DateTime(),
+            ];
+
+
+            $thread = $post['thread_id'];
+
+            Post::create($post);
+
+            return redirect("/forum/threads/$thread");
+        }
     }
 
     /**

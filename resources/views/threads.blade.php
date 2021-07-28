@@ -1,21 +1,16 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $forums->name}}</title>
-</head>
-<body>
-    
-    <h1>{{$forums->name}}</h1>
-    <hr />
-    @foreach($forums->threads as $thread)
-        <div>
-            <h4>{{$thread->title}}</h4>
-            <p>{{$thread->post_count()}}</p>
+<x-layout title="{{$forums->name}}">
+    <div class="container mx-auto my-5">
+        <div class="bg-white lg:mt-10 lg:flex lg:flex-col border-2 px-4 py-5 shadow-lg">    
+            <div class="mb-10">
+                <h1 class="font-bold text-black-500 text-xl">{{$forums->name}}</h1>
+                    <hr />
+                @foreach($forums->threads as $thread)
+                    <div class="flex flex-row">
+                        <h4 class="text-lg text-purple-600 hover:text-purple-900 hover:underline"><a href={{"/forum/threads/$thread->id"}}>{{$thread->title}}</a></h4>
+                        <p>{{$thread->post_count()}}</p>
+                    </div>
+                @endforeach
+            </div>
         </div>
-    @endforeach
-</body>
-</html>
+    </div>
+</x-layout>

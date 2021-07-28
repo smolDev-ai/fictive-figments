@@ -13,14 +13,14 @@ class Thread extends Model
     use HasFactory;
 
 
-    protected $with = ['author', 'posts'];
+    protected $with = ['creator', 'posts'];
 
     public function forum()
     {
         return $this->belongsTo(Forum::class, "forum");
     }
 
-    public function author()
+    public function creator()
     {
         return $this->belongsTo(User::class, "author");
     }

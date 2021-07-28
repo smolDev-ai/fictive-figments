@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ForumController;
-use App\Models\Category;
-use App\Models\Forum;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ThreadController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +27,19 @@ Route::get('/', function () {
 
 Route::get('/forum', [CategoryController::class, 'index']);
 Route::get('/forum/{id}', [ForumController::class, 'show']);
+Route::get('/forum/threads/{id}', [ThreadController::class, 'show']);
+Route::post('/reply', [PostController::class, 'store']);
+
+
+Route::get('/register', [RegisterController::class, 'create']);
+Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/login', function () {
+    return view("auth.login");
+});
+
+
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/logout', function () {
+    return Auth::logout();
+});

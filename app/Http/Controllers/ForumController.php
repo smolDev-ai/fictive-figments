@@ -46,7 +46,7 @@ class ForumController extends Controller
     public function show($id)
     {
         return view("threads", [
-            "forums" => Forum::with("threads")->find($id),
+            "forums" => Forum::find($id),
         ]);
     }
 
