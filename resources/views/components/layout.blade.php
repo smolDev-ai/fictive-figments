@@ -14,11 +14,13 @@
     <title>{{$title}}</title>
 </head>
     <body class="bg-gray-500">
-        <ul class="flex flex-row-reverse bg-white py-5">
+        <ul class="flex flex-row-revere bg-white py-5">
             @auth
-                <li class="mr-6">
-                    <a class="text-blue-500 hover:text-blue-800 text-lg" href={{"/thread/create"}}>Create A Thread</a>
-                </li>
+                @if(!request()->is("forum/*"))
+                    <li class="mr-6">
+                        <a class="text-blue-500 hover:text-blue-800 text-lg" href={{"/thread/create"}}>Create A Thread</a>
+                    </li>
+                @endif
                 <li class="mr-6">
                     <a class="text-blue-500 hover:text-blue-800 text-lg" href="#">{{Auth::user()->username}}</a>
                 </li>
