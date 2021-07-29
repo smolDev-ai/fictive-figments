@@ -2,6 +2,7 @@
  <div class="min-h-screen py-6 flex flex-col justify-center sm:py-12">
         <div class="relative py-3 w-11/12 max-w-xl sm:mx-auto">
             <div class="relative p-8 bg-white shadow-sm sm:rounded-xl">
+                @auth
                 <form method="POST" action="/forum">
                     @csrf
                     <div class="mb-5 relative">
@@ -34,6 +35,12 @@
                             </ul>
                         @endif
                 </form>
+                @endauth
+                @guest
+                    <div>
+                        <p class="text-center">You must be <a class="text-purple-600 hover:text-purple-900 hover:underline" href="/login">Logged in</a> to create a thread.</p>
+                    </div>
+                @endguest
             </div>
         </div>
     </div>

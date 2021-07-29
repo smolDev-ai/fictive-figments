@@ -23,15 +23,15 @@
                     <a class="text-blue-500 hover:text-blue-800 text-lg" href="#">{{Auth::user()->username}}</a>
                 </li>
                 <li class="mr-6">
-                    <a class="text-blue-500 hover:text-blue-800 text-lg" href="#">Logout</a>
+                    <livewire:logout />
                 </li>
             @endauth
             @guest
                 <li class="mr-6">
-                    <a class="text-blue-500 hover:text-blue-800 text-lg" href="#">Reigster</a>
+                    <a class="text-blue-500 hover:text-blue-800 text-lg" href={{"/register"}}>Reigster</a>
                 </li>
                 <li class="mr-6">
-                    <a class="text-blue-500 hover:text-blue-800 text-lg" href="#">Login</a>
+                    <a class="text-blue-500 hover:text-blue-800 text-lg" href={{"/login"}}>Login</a>
                 </li>
             @endguest
         </ul>

@@ -42,6 +42,3 @@ Route::get('/login', function () {
 
 
 Route::post('/login', [LoginController::class, 'authenticate']);
-Route::get('/logout', function () {
-    return Auth::logout();
-});
