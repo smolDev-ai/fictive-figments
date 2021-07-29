@@ -6,7 +6,7 @@
                 <p>{{$thread->creator->username}}</p>
                 <p class="mt-5 mb-10">{{$thread->body}}</p>
                     <hr />
-                @foreach($thread->posts as $post)
+                @foreach($posts as $post)
                     <div class="flex flex-row">
                         <p class="mb-10">{{$post->body}}</p>
                         <p>{{$post->creator->username}}</p>

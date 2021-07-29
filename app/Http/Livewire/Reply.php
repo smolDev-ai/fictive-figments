@@ -9,11 +9,13 @@ use Livewire\Component;
 class Reply extends Component
 {
     public $thread;
+    public $posts;
     public $body;
     public $update;
 
     public function submitForm()
     {
+        $this->posts = $this->thread->posts;
         $currentThread = (int) substr(url()->previous(), -strlen($this->thread->id));
 
         if (!$currentThread == substr(url()->previous(), -strlen($this->thread->id))) {
@@ -28,11 +30,10 @@ class Reply extends Component
         }
 
 
-        Post::create($post);
+        $newPost = Post::create($post);
 
         $this->resetForm();
-
-        return redirect("/forum/threads/{$this->thread->id}");
+        $newPost ? $this->posts = [...$this->posts, $newPost] : "";
     }
 
     private function resetForm()
@@ -40,12 +41,6 @@ class Reply extends Component
         $this->body = '';
         $this->author = '';
     }
-
-    public function refresh()
-    {
-        $this->update = !$this->update;
-    }
-
 
     public function render()
     {
