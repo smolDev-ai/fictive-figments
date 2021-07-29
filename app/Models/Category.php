@@ -10,6 +10,8 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $with = ['forums'];
+
 
     public function forums()
     {

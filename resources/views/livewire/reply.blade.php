@@ -14,7 +14,7 @@
                 @endforeach
             </div>
             @auth
-                <form wire:submit.prevent="submitForm" method="POST" action="/forum/threads/{{$thread->id}}/reply">
+                <form wire:submit.prevent="submitForm" method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->id}}/reply">
                     @csrf
                     <textarea wire:model.defer="body" class="w-full mb-3 px-5" name="body" id="body" rows="10" placeholder="Want to Reply?"></textarea>
                     <input wire:model="thread" type="hidden" name="thread" value={{$thread->id}}>

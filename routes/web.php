@@ -26,9 +26,11 @@ Route::get('/', function () {
 
 
 Route::get('/forum', [CategoryController::class, 'index']);
+Route::get('/thread/create', [ThreadController::class, 'create']);
+Route::post('/forum', [ThreadController::class, 'store']);
 Route::get('/forum/{id}', [ForumController::class, 'show']);
-Route::get('/forum/threads/{id}', [ThreadController::class, 'show']);
-Route::post('/forum/threads/{id}/reply', [PostController::class, 'store']);
+Route::get('/forum/{forum_id}/thread/{thread_id}', [ThreadController::class, 'show']);
+Route::post('/forum/{forum_id}/thread/{thread_id}/reply', [PostController::class, 'store']);
 
 
 Route::get('/register', [RegisterController::class, 'create']);

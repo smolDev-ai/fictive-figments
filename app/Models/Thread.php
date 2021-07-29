@@ -12,6 +12,8 @@ class Thread extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
 
     protected $with = ['creator', 'posts'];
 
