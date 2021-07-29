@@ -14,6 +14,27 @@
     <title>{{$title}}</title>
 </head>
     <body class="bg-gray-500">
+        <ul class="flex flex-row-reverse bg-white py-5">
+            @auth
+                <li class="mr-6">
+                    <a class="text-blue-500 hover:text-blue-800 text-lg" href="#">Create A Thread</a>
+                </li>
+                <li class="mr-6">
+                    <a class="text-blue-500 hover:text-blue-800 text-lg" href="#">{{Auth::user()->username}}</a>
+                </li>
+                <li class="mr-6">
+                    <a class="text-blue-500 hover:text-blue-800 text-lg" href="#">Logout</a>
+                </li>
+            @endauth
+            @guest
+                <li class="mr-6">
+                    <a class="text-blue-500 hover:text-blue-800 text-lg" href="#">Reigster</a>
+                </li>
+                <li class="mr-6">
+                    <a class="text-blue-500 hover:text-blue-800 text-lg" href="#">Login</a>
+                </li>
+            @endguest
+        </ul>
 
         {{$slot}}
 
