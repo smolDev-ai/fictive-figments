@@ -31,13 +31,18 @@ class ThreadController extends Controller
         return view("threads.create", ["categories" => Category::all()]);
     }
 
+    public function forumThread()
+    {
+        return view("threads.threadforum");
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id = null)
     {
         $thread = $request->validate([
             "title" => "required|min:3|max:255|unique:threads,title",
@@ -46,12 +51,15 @@ class ThreadController extends Controller
         ]);
 
         $thread['author'] = $request->user()->id;
-        $thread['forum'] = $request['forum'];
+
+
+
+        $id ? $thread['forum'] = (int) $id : $thread['forum'] = $request['forum'];
         $thread['created_on'] = new DateTime();
 
         $newThread = Thread::create($thread);
 
-        return redirect("/forum/{$request['forum']}/thread/{$newThread->id}");
+        return redirect("/forum/{$thread['forum']}/thread/{$newThread->id}");
     }
 
     /**

@@ -14,7 +14,7 @@
     <title>{{$title}}</title>
 </head>
     <body class="bg-gray-500">
-        <ul class="flex flex-row-revere bg-white py-5">
+        <ul class="flex flex-row-reverse bg-white py-5">
             @auth
                 @if(!request()->is("forum/*"))
                     <li class="mr-6">
