@@ -1,8 +1,6 @@
 # TODO:
 Breakdown MVP Goals into more actionable achievements.
 
-...
-
 ## Unrealistic MVP
 
 First Round MVP features include:
@@ -34,7 +32,7 @@ Fifth Round MVP Features Include:
 - Ability for Forum admins to create their own styles for the forum, or to select a default template.
 - Ability for Users to select a template that is not the default for their own view of the forum.
 - Thread tags, and filtering.
-[7:19 PM]
+
 Sixth Round MVP Features Include:
 - Forum-wide search including things such as post author, post contains, thread contains, etc.(edited)
 - Social Media integration--if not already completed.

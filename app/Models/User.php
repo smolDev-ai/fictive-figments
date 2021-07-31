@@ -46,6 +46,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $with = [
+        "userRoles"
+    ];
+
     public function threads()
     {
         return $this->hasMany(Thread::class);
@@ -64,5 +68,10 @@ class User extends Authenticatable
     public function pmposts()
     {
         return $this->hasMany(PMPost::class);
+    }
+
+    public function userRoles()
+    {
+        return $this->belongsToMany("App\Role", "roles_users");
     }
 }
