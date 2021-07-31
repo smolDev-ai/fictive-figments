@@ -44,3 +44,7 @@ Route::get('/login', function () {
 
 
 Route::post('/login', [LoginController::class, 'authenticate']);
+
+Route::get('/admin', function () {
+    return view('admin.main');
+})->middleware('isStaff');
