@@ -11,6 +11,7 @@ class Category extends Model
     use HasFactory;
 
     protected $with = ['forums'];
+    protected $guarded = [];
 
 
     public function forums()

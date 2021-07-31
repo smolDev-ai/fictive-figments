@@ -16,10 +16,17 @@
     <body class="bg-gray-500">
         <ul class="flex flex-row-reverse bg-white py-5">
             @auth
-                @if(!request()->is("forum/*"))
+                @if(request()->is("forum"))
                     <li class="mr-6">
                         <a class="text-blue-500 hover:text-blue-800 text-lg" href={{"/thread/create"}}>Create A Thread</a>
                     </li>
+                @elseif(request()->is("admin") || request()->is("admin/*"))
+                    <li class="mr-6">
+                        <a class="text-blue-500 hover:text-blue-800 text-lg" href={{"/admin/create/category"}}>Create A Category</a>
+                    </li>  
+                    <li class="mr-6">
+                        <a class="text-blue-500 hover:text-blue-800 text-lg" href={{"/admin/create/forum"}}>Create A Forum</a>
+                    </li>  
                 @endif
                 <li class="mr-6">
                     <a class="text-blue-500 hover:text-blue-800 text-lg" href="#">{{Auth::user()->username}}</a>

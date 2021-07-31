@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ThreadController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,16 @@ Route::get('/login', function () {
 
 Route::post('/login', [LoginController::class, 'authenticate']);
 
-Route::get('/admin', function () {
-    return view('admin.main');
-})->middleware('isStaff');
+Route::group(["prefix" => "admin", "middleware" => "isStaff"], function () {
+    Route::get('/', function () {
+        return view('admin.main');
+    });
+
+    Route::get('/create/category', [CategoryController::class, 'create']);
+
+    Route::get('/create/forum', [ForumController::class, 'create']);
+
+    Route::post('/category', [CategoryController::class, 'store']);
+
+    Route::post('/forum', [ForumController::class, 'store']);
+});

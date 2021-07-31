@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.category.create");
     }
 
     /**
@@ -37,7 +37,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = $request->validate([
+            "name" => "required|min:3|max:255|unique:categories,name",
+        ]);
+
+        $category['is_rp'] = $request->has('is_rp');
+
+        Category::create($category);
+
+        return redirect('forum/');
     }
 
     /**
