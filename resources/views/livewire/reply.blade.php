@@ -4,7 +4,7 @@
                 <h1 class="font-bold text-black-500 text-xl">{{$thread->title}}</h1>
                 <hr />
                 <p>{{$thread->creator->username}}</p>
-                <p class="mt-5 mb-10">{{$thread->body}}</p>
+                <p class="mt-5 mb-10">@bb($thread->body)</p>
                     <hr />
                 @foreach($posts as $post)
                     <div class="flex flex-row">

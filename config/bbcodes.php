@@ -172,7 +172,24 @@ return  [
         'pattern' => '/\[bgcolor\=(#[A-f0-9]{6}|#[A-f0-9]{3})\](.*?)\[\/bgcolor\]/s',
         'replace' => '<span style="background-color: $1;">$2</span>',
         'content' => '$2',
-    ]
+    ],
 
+    'table' => [
+        'pattern' => '/\[table\](.*?)\[\/table\]/s',
+        'replace' => '<table>$1</table>',
+        'content' => '$1'
+    ],
+
+    'tr' => [
+        'pattern' => '/\[tr\](.*?)\[\/tr\]/s',
+        'replace' => '<tr>$1</tr>',
+        'content' => '$1'
+    ],
+
+    'td' => [
+        'pattern' => '/\[td\](.*?)\[\/td\]/s',
+        'replace' => '<td>$1</td>',
+        'content' => '$1'
+    ],
 
 ];

@@ -11,8 +11,14 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $with = ['creator'];
+    protected $with = ['creator', 'thread'];
     protected $guarded = [];
+
+    protected $dates = [
+        'posted_on',
+        'created_at',
+        'updated_at'
+    ];
 
     public function thread()
     {

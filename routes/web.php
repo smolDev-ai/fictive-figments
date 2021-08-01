@@ -4,11 +4,13 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ThreadController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,3 +61,6 @@ Route::group(["prefix" => "admin", "middleware" => "isStaff"], function () {
 
     Route::post('/forum', [ForumController::class, 'store']);
 });
+
+
+Route::get('/profile/{username}', [ProfileController::class, 'show']);

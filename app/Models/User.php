@@ -52,12 +52,12 @@ class User extends Authenticatable
 
     public function threads()
     {
-        return $this->hasMany(Thread::class);
+        return $this->hasMany(Thread::class, "author")->latest();
     }
 
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class, "author")->latest();
     }
 
     public function pms()

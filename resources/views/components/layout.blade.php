@@ -45,12 +45,19 @@
                 </li>
             @endguest
         </ul>
+        
 
-        {{$slot}}
+            {{$slot}}
 
-    
-   
         <script src="{{asset('node_modules/tinymce/tinymce.js')}}"></script>
         @livewireScripts
+        <script>
+            tinymce.init({
+                selector: "textarea#body",
+                height: 500,
+                plugins: 'emoticons image imagetools media charmap lists advlist bbcode code codesample wordcount autolink link autosave spellchecker',
+                toolbar: 'undo redo | styleselect | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | numlist bullist | media image charmap emoticons codesample | outdent indent | restoredraft code spellchecker',
+            });
+    </script>
 </body>
 </html>

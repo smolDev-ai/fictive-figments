@@ -1,6 +1,5 @@
 <x-layout title="{{$forums->name}}">
-    <div class="container mx-auto my-5">
-        <div class="bg-white lg:mt-10 lg:flex lg:flex-col border-2 px-4 py-5 shadow-lg">    
+    <x-normalPage>
             <div class="mb-10">
                 <a class="text-lg text-purple-600 hover:text-purple-900 hover:underline" href={{"/forum/$forums->id/thread/create"}}>New Thread</a>
                 <h1 class="font-bold text-black-500 text-xl">{{$forums->name}}</h1>
@@ -12,6 +11,5 @@
                     </div>
                 @endforeach
             </div>
-        </div>
-    </div>
+    </x-normalPage>
 </x-layout>

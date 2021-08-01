@@ -14,8 +14,14 @@ class Thread extends Model
 
     protected $guarded = [];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'created_on'
+    ];
 
-    protected $with = ['creator', 'posts'];
+
+    protected $with = ['creator'];
 
     public function forum()
     {
