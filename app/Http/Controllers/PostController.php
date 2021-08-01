@@ -42,7 +42,7 @@ class PostController extends Controller
             return ValidationException::withMessages(["thread_err" => "You can't post to this thread."]);
         } else {
             $post = [
-                "body" => $request['body'],
+                "body" => $request->input('body'),
                 "thread_id" => $thread_id,
                 "author" => $request->user()->id,
                 "posted_on" => new DateTime(),

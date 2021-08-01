@@ -8,7 +8,7 @@
                     <hr />
                 @foreach($posts as $post)
                     <div class="flex flex-row">
-                        <p class="mb-10">{{$post->body}}</p>
+                        <p class="mb-10">@bb($post->body)</p>
                         <p>{{$post->creator->username}}</p>
                     </div>
                 @endforeach
@@ -16,12 +16,16 @@
             @auth
                 <form wire:submit.prevent="submitForm" method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->id}}/reply">
                     @csrf
-                    <textarea wire:model.defer="body" class="w-full mb-3 px-5" name="body" id="body" rows="10" placeholder="Want to Reply?"></textarea>
+                    <x-input.tinymce wire:model="body" class="w-full" rows="10" placeholder="Want to Reply?"></x-input.tinymce>
                     <input wire:model="thread" type="hidden" name="thread" value={{$thread->id}}>
                     <button class="w-32 bg-indigo-600 text-white p-3 rounded-md">Submit</button>
                 </form>
             @endauth
             @guest
                 <p>You must be <a class="text-purple-600 hover:text-purple-900 hover:underline" href="/login">Logged in</a> to post.</p>
-            @endguest       
+            @endguest  
+            
+            
+</div>
+
     </div>

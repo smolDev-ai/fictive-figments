@@ -29,7 +29,6 @@ class Reply extends Component
             ];
         }
 
-
         $newPost = Post::create($post);
 
         $this->resetForm();

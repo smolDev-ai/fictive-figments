@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @livewireStyles
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{asset('js/app.js')}}" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <title>{{$title}}</title>
@@ -48,6 +49,8 @@
         {{$slot}}
 
     
-    @livewireScripts
+   
+        <script src="{{asset('node_modules/tinymce/tinymce.js')}}"></script>
+        @livewireScripts
 </body>
 </html>

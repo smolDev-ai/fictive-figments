@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41e8948bf42ebeda0cd31def1f103ee2",
+    "content-hash": "426406e3822d15946263bdbde6def22e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -292,6 +292,55 @@
                 }
             ],
             "time": "2020-05-25T17:44:05+00:00"
+        },
+        {
+            "name": "dot-im/bbcode-parser",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dot-im/bbcode-parser.git",
+                "reference": "fdae46997ed9cb80e3f932a1a2b2957aa82c84a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dot-im/bbcode-parser/zipball/fdae46997ed9cb80e3f932a1a2b2957aa82c84a1",
+                "reference": "fdae46997ed9cb80e3f932a1a2b2957aa82c84a1",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Dotim\\BBCode\\BBCodeServiceProvider"
+                    ],
+                    "aliases": {
+                        "BBCode": "Dotim\\BBCode\\Facades\\BBCode"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dotim\\BBCode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Parse your BBCode easy with this library.",
+            "keywords": [
+                "bbcode",
+                "laravel",
+                "parser"
+            ],
+            "support": {
+                "issues": "https://github.com/dot-im/bbcode-parser/issues",
+                "source": "https://github.com/dot-im/bbcode-parser/tree/master"
+            },
+            "time": "2020-05-04T20:36:05+00:00"
         },
         {
             "name": "dragonmantank/cron-expression",

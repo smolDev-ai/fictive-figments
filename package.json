@@ -16,5 +16,9 @@
         "lodash": "^4.17.19",
         "postcss": "^8.3.6",
         "tailwindcss": "^2.2.7"
+    },
+    "dependencies": {
+        "alpinejs": "^3.2.2",
+        "tinymce": "^5.8.2"
     }
 }
