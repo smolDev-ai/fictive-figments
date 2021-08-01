@@ -74,4 +74,15 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, "roles_users", "user_id", "role_id");
     }
+
+    public function incrementPostCount()
+    {
+        return $this->increment('postCount');
+    }
+
+    public function decrementPostCount()
+    {
+        return $this->decrement('postCount');
+        ;
+    }
 }

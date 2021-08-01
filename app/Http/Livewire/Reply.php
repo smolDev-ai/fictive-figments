@@ -31,6 +31,8 @@ class Reply extends Component
 
         $newPost = Post::create($post);
 
+        request()->user()->incrementPostCount();
+
         $this->resetForm();
         $newPost ? $this->posts = [...$this->posts, $newPost] : "";
     }

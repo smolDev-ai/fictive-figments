@@ -33,7 +33,7 @@ class ProfileController extends Controller
     public function show($username)
     {
         $user = User::where('username', $username)->first();
-        $allContent = $user->threads->merge($user->posts);
+        $allContent = $user->threads->merge($user->posts)->sortByDesc('created_at');
 
         return view('profile.show', [
             "profileUser" => $user,

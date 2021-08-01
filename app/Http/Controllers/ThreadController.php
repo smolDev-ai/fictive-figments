@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Thread;
+use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -59,6 +60,11 @@ class ThreadController extends Controller
 
         $newThread = Thread::create($thread);
 
+        // $user = User::find($request->user()->id);
+        // $user->increment('postCount');
+
+        $request->user()->incrementPostCount();
+
         return redirect("/forum/{$thread['forum']}/thread/{$newThread->id}");
     }
 
@@ -71,7 +77,7 @@ class ThreadController extends Controller
     public function show($forum_id, $thread_id)
     {
         return view('threads.show', [
-            'thread' => Thread::find($thread_id)->with('posts'),
+            'thread' => Thread::find($thread_id)->with('posts')->first(),
         ]);
     }
 

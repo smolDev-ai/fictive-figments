@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->integer("warnings")->default(0);
             $table->string("title")->nullable();
+            $table->integer("postCount")->default(0);
         });
     }
 
