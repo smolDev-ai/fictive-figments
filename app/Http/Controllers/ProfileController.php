@@ -40,4 +40,15 @@ class ProfileController extends Controller
             "allContent" => $this->paginate($allContent, 10)
         ]);
     }
+
+    public function me()
+    {
+        $user = User::where('username', request()->user()->username)->first();
+        $allContent = $user->threads->merge($user->posts)->sortByDesc('created_at');
+
+        return view('profile.show', [
+            "profileUser" => $user,
+            "allContent" => $this->paginate($allContent, 10)
+        ]);
+    }
 }

@@ -60,8 +60,6 @@ class ThreadController extends Controller
 
         $newThread = Thread::create($thread);
 
-        // $user = User::find($request->user()->id);
-        // $user->increment('postCount');
 
         $request->user()->incrementPostCount();
 
@@ -77,7 +75,7 @@ class ThreadController extends Controller
     public function show($forum_id, $thread_id)
     {
         return view('threads.show', [
-            'thread' => Thread::find($thread_id)->with('posts')->first(),
+            'thread' => Thread::find($thread_id),
         ]);
     }
 

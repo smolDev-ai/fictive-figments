@@ -15,8 +15,14 @@
     <title>{{$title}}</title>
 </head>
     <body class="bg-gray-500">
-        <ul class="flex flex-row-reverse bg-white py-5">
+
+        <ul class="flex justify-end bg-white py-5">
             @auth
+                @if(auth()->user()->isStaff() && !request()->is('admin'))
+                    <li class="mr-6">
+                        <a class="text-blue-500 hover:text-blue-800 text-lg" href={{"/admin"}}>Admin Panel</a>
+                    </li>
+                @endif
                 @if(request()->is("forum"))
                     <li class="mr-6">
                         <a class="text-blue-500 hover:text-blue-800 text-lg" href={{"/thread/create"}}>Create A Thread</a>
@@ -30,7 +36,7 @@
                     </li>  
                 @endif
                 <li class="mr-6">
-                    <a class="text-blue-500 hover:text-blue-800 text-lg" href="#">{{Auth::user()->username}}</a>
+                    <a class="text-blue-500 hover:text-blue-800 text-lg" href="/me">{{Auth::user()->username}}</a>
                 </li>
                 <li class="mr-6">
                     <livewire:logout />

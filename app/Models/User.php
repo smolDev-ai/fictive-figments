@@ -83,6 +83,16 @@ class User extends Authenticatable
     public function decrementPostCount()
     {
         return $this->decrement('postCount');
-        ;
+    }
+
+    public function isStaff()
+    {
+        foreach ($this->userRoles as $role) {
+            if ($role->name === 'admin' || $role->name === 'mod') {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }

@@ -64,3 +64,6 @@ Route::group(["prefix" => "admin", "middleware" => "isStaff"], function () {
 
 
 Route::get('/profile/{username}', [ProfileController::class, 'show']);
+
+
+Route::get("/me", [ProfileController::class, 'me']);
