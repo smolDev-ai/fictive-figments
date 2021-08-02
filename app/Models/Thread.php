@@ -48,4 +48,19 @@ class Thread extends Model
         $threadTitle = substr($this->title, 0, strlen($this->type . "_")) === $this->type . "_" ? substr($this->title, strlen($this->type . "_")) : $this->title;
         return $threadTitle;
     }
+
+    public function getICPostCount()
+    {
+        return Thread::where('type', 'ic')->where('title', 'ic_' . $this->trimTitle())->first()->post_count();
+    }
+
+    public function getOOCPostCount()
+    {
+        return Thread::where('type', 'ooc')->where('title', 'ooc_' . $this->trimTitle())->first()->post_count();
+    }
+
+    public function getCharPostCount()
+    {
+        return Thread::where('type', 'char')->where('title', 'char_' . $this->trimTitle())->first()->post_count();
+    }
 }

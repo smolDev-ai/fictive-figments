@@ -67,6 +67,8 @@ class ThreadController extends Controller
 
 
         if ($newThread->type === 'ooc') {
+            $newThread->title = 'ooc_' . $thread['title'];
+            $newThread->save();
             $InCharacter = [
                 "title" => 'ic_' . $thread['title'],
                 "body" => '',
@@ -89,6 +91,8 @@ class ThreadController extends Controller
             Thread::create($characters);
             Thread::create($InCharacter);
         } elseif ($newThread->type === 'ic') {
+            $newThread->title = 'ic_' . $thread['title'];
+            $newThread->save();
             $outOfCharacter = [
                 "title" => 'ooc_' . $thread['title'],
                 "body" => '',

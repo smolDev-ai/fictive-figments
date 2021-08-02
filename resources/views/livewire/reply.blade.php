@@ -1,6 +1,14 @@
     <div class="container mx-auto my-5">
         <div class="bg-white lg:mt-10 lg:flex lg:flex-col border-2 px-4 py-5 shadow-lg">    
             <div class="mb-10">
+                <div>
+                    <ul>
+    
+                            <li><a href="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/ic">{{strtoupper('ic')}}</a> {{$thread->getICPostCount()}}</li>
+                            <li><a href="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/ooc">{{strtoupper('ooc')}}</a> {{$thread->getOOCPostCount()}}</li>
+                            <li><a href="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/char">{{strtoupper('char')}}</a> {{$thread->getCharPostCount()}}</li>
+                    </ul>
+                </div>
                 <h1 class="font-bold text-black-500 text-xl">{{$trimmedTitle}}</h1>
                 <hr />
                 <p>{{$thread->creator->username}}</p>
