@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function threads()
     {
-        return $this->hasMany(Thread::class, "author")->latest();
+        return $this->hasMany(Thread::class, "author")->latest()->where('type', 'ooc');
     }
 
     public function posts()

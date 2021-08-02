@@ -42,4 +42,10 @@ class Thread extends Model
     {
         return $this->posts->count();
     }
+
+    public function trimTitle()
+    {
+        $threadTitle = substr($this->title, 0, strlen($this->type . "_")) === $this->type . "_" ? substr($this->title, strlen($this->type . "_")) : $this->title;
+        return $threadTitle;
+    }
 }

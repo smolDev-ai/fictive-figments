@@ -12,22 +12,19 @@ class Reply extends Component
     public $posts;
     public $body;
     public $update;
+    public $trimmedTitle;
 
     public function submitForm()
     {
         $this->posts = $this->thread->posts;
-        $currentThread = (int) substr(url()->previous(), -strlen($this->thread->id));
 
-        if (!$currentThread == substr(url()->previous(), -strlen($this->thread->id))) {
-            return session()->flash("Failure", "You can't post to this thread.");
-        } else {
-            $post = [
+        $post = [
                 "body" => $this->body,
                 "thread_id" => $this->thread->id,
                 "author" => auth()->user()->id,
                 "posted_on" => new DateTime(),
             ];
-        }
+
 
         $newPost = Post::create($post);
 

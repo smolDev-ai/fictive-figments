@@ -52,18 +52,68 @@ class ThreadController extends Controller
         ]);
 
         $thread['author'] = $request->user()->id;
+        $thread['type'] = $request->type;
 
+        $createSlugArr = explode(' ', $thread['title']);
+        $slug = implode('-', $createSlugArr);
 
+        $thread['slug'] = $slug;
 
         $id ? $thread['forum'] = (int) $id : $thread['forum'] = $request['forum'];
         $thread['created_on'] = new DateTime();
 
         $newThread = Thread::create($thread);
-
-
         $request->user()->incrementPostCount();
 
-        return redirect("/forum/{$thread['forum']}/thread/{$newThread->id}");
+
+        if ($newThread->type === 'ooc') {
+            $InCharacter = [
+                "title" => 'ic_' . $thread['title'],
+                "body" => '',
+                "author" => $thread['author'],
+                "slug" => $slug,
+                "type" => 'ic',
+                "forum" => $id ? $thread['forum'] = (int) $id : $thread['forum'] = $request['forum'],
+                "created_on" => new DateTime()
+            ];
+            $characters = [
+                "title" => 'char_' . $thread['title'],
+                "body" => '',
+                "author" => $thread['author'],
+                "slug" => $slug,
+                "type" => 'char',
+                "forum" => $id ? $thread['forum'] = (int) $id : $thread['forum'] = $request['forum'],
+                "created_on" => new DateTime()
+            ];
+
+            Thread::create($characters);
+            Thread::create($InCharacter);
+        } elseif ($newThread->type === 'ic') {
+            $outOfCharacter = [
+                "title" => 'ooc_' . $thread['title'],
+                "body" => '',
+                "author" => $thread['author'],
+                "slug" => $slug,
+                "type" => 'ooc',
+                "forum" => $id ? $thread['forum'] = (int) $id : $thread['forum'] = $request['forum'],
+                "created_on" => new DateTime()
+            ];
+            $characters = [
+                "title" => 'char_' . $thread['title'],
+                "body" => '',
+                "author" => $thread['author'],
+                "slug" => $slug,
+                "type" => 'char',
+                "forum" => $id ? $thread['forum'] = (int) $id : $thread['forum'] = $request['forum'],
+                "created_on" => new DateTime()
+            ];
+
+            Thread::create($characters);
+            Thread::create($outOfCharacter);
+        }
+
+
+        return redirect("/forum/{$thread['forum']}/thread/$newThread->slug/$newThread->type");
     }
 
     /**
@@ -72,10 +122,12 @@ class ThreadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($forum_id, $thread_id)
+    public function show($forum_id, $thread_slug, $thread_type)
     {
+        $thread = Thread::where('slug', $thread_slug)->where('type', $thread_type)->first();
         return view('threads.show', [
-            'thread' => Thread::find($thread_id),
+            'thread' => $thread,
+            "trimmedTitle" => $thread->trimTitle(),
         ]);
     }
 

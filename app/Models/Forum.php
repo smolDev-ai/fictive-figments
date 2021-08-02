@@ -24,7 +24,7 @@ class Forum extends Model
 
     public function threads()
     {
-        return $this->hasMany(Thread::class, "forum");
+        return $this->hasMany(Thread::class, "forum")->where('type', 'ooc');
     }
 
     public function parent()

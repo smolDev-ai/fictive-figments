@@ -34,8 +34,8 @@ Route::get('/forum/{id}/thread/create', [ThreadController::class, 'forumThread']
 Route::post('/forum', [ThreadController::class, 'store']);
 Route::post('/forum/{id}', [ThreadController::class, 'store']);
 Route::get('/forum/{id}', [ForumController::class, 'show']);
-Route::get('/forum/{forum_id}/thread/{thread_id}', [ThreadController::class, 'show']);
-Route::post('/forum/{forum_id}/thread/{thread_id}/reply', [PostController::class, 'store']);
+Route::get('/forum/{forum_id}/thread/{thread_slug}/{thread_type}', [ThreadController::class, 'show']);
+Route::post('/forum/{forum_id}/thread/{thread_slug}/{thread_type}/reply', [PostController::class, 'store']);
 
 
 Route::get('/register', [RegisterController::class, 'create']);

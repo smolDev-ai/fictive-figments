@@ -1,7 +1,7 @@
     <div class="container mx-auto my-5">
         <div class="bg-white lg:mt-10 lg:flex lg:flex-col border-2 px-4 py-5 shadow-lg">    
             <div class="mb-10">
-                <h1 class="font-bold text-black-500 text-xl">{{$thread->title}}</h1>
+                <h1 class="font-bold text-black-500 text-xl">{{$trimmedTitle}}</h1>
                 <hr />
                 <p>{{$thread->creator->username}}</p>
                 <p class="mt-5 mb-10">@bb($thread->body)</p>
@@ -14,7 +14,7 @@
                 @endforeach
             </div>
             @auth
-                <form wire:submit.prevent="submitForm" method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->id}}/reply">
+                <form wire:submit.prevent="submitForm" method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/{{$thread->type}}/reply">
                     @csrf
                     <x-input.tinymce wire:model="body" class="w-full" rows="10" placeholder="Want to Reply?"></x-input.tinymce>
                     <input wire:model="thread" type="hidden" name="thread" value={{$thread->id}}>
