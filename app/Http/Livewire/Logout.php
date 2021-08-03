@@ -9,7 +9,7 @@ class Logout extends Component
 {
     public function logout()
     {
-        $user = request()->user()->username;
+        $user = request()->user()->slugified_user;
         Auth::logout();
         if (substr(url()->previous(), -3) == '/me') {
             return redirect("/profile/$user");
