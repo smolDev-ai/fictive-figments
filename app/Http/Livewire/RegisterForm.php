@@ -10,7 +10,6 @@ class RegisterForm extends Component
     public $username;
     public $email;
     public $password;
-    private $slugified_user;
 
     public function submitForm()
     {
@@ -20,23 +19,13 @@ class RegisterForm extends Component
             'password' => 'required|min:8|max:255',
         ]);
 
-        $user['password'] = bcrypt($user['password']);
+        $user['password'] = \bcrypt($user['password']);
 
-        if(preg_match('/^[^ ].* .*[^ ]$/', $user['username'])) {
-            $createSlugArr = explode(' ', $user['username']);
-            $slug = implode('-', $createSlugArr);
-            $user['slugified_user'] = $slug;
-        } else {
-            $user['slugified_user'] = $user['username'];
-        }
-        
-        $newUser = User::create($user);
-        $newUser->slugified_user = $user['slugified_user'];
-        $newUser->save();
+        User::create($user);
 
         $this->resetForm();
 
-        session()->flash("success", "Account {$newUser->username} successfully registered!");
+        session()->flash("success", "Account {$user['username']} successfully registered!");
 
         return redirect('/login');
     }

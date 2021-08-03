@@ -30,9 +30,9 @@ class ProfileController extends Controller
         );
     }
 
-    public function show($slugified_user)
+    public function show($username)
     {
-        $user = User::where('slugified_user', $slugified_user)->first();
+        $user = User::where('username', $username)->first();
         $allContent = $user->threads->merge($user->posts)->sortByDesc('created_at');
 
         return view('profile.show', [

@@ -7,7 +7,7 @@
             @if($content->thread_id !== null)
                 <p>{{$content->thread->trimTitle()}} posted {{$content->posted_on->diffForHumans()}}</p>
             @else
-                <p>{{$content->trimTitle()}} created {{ $content->created_at->diffForHumans() }}</p>
+                <p>{{$content->title}} created {{ $content->created_at->diffForHumans() }}</p>
             @endif
             
            
