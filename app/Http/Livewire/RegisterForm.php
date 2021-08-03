@@ -21,7 +21,17 @@ class RegisterForm extends Component
 
         $user['password'] = \bcrypt($user['password']);
 
-        User::create($user);
+        if (preg_match('/^[^ ].* .*[^ ]$/', $user['username'])) {
+            $createSlugArr = explode(' ', $user['username']);
+            $slug = implode('-', $createSlugArr);
+            $user['slugified_user'] = $slug;
+        } else {
+            $user['slugified_user'] = $user['username'];
+        }
+
+        $newUser = User::create($user);
+        $newUser->slugified_user = $user['slugified_user'];
+        $newUser->save();
 
         $this->resetForm();
 

@@ -36,9 +36,9 @@ Route::post('/forum/{id}', [ThreadController::class, 'store']);
 Route::get('/forum/{id}', [ForumController::class, 'show']);
 Route::get('/forum/{forum_id}/thread/{thread_slug}/{thread_type}', [ThreadController::class, 'show']);
 Route::get('/forum/{forum_id}/thread/{thread_slug}', [ThreadController::class, 'show']);
-Route::delete('/forum/{forum_id}/thread/{thread_slug}/delete', [ThreadController::class, 'destroy']);
 Route::delete('/forum/{forum_id}/thread/{thread_slug}/{thread_type}/delete', [ThreadController::class, 'destroy']);
 Route::post('/forum/{forum_id}/thread/{thread_slug}/{thread_type}/reply', [PostController::class, 'store']);
+Route::post('/forum/{forum_id}/thread/{thread_slug}/reply', [PostController::class, 'store']);
 
 
 Route::get('/register', [RegisterController::class, 'create']);
@@ -66,7 +66,7 @@ Route::group(["prefix" => "admin", "middleware" => "isStaff"], function () {
 });
 
 
-Route::get('/profile/{username}', [ProfileController::class, 'show']);
+Route::get('/profile/{slugified_user}', [ProfileController::class, 'show']);
 
 
 Route::get("/me", [ProfileController::class, 'me']);

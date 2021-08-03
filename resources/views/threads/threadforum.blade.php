@@ -12,14 +12,13 @@
                             
                     </div>
 
-                    @if($forum->category->is_rp)
                      <div class="mb-5 relative">
                         <select name="type" id="type">
                             <option value="ooc">OOC</option>
                             <option value="ic">IC</option>
                         </select>
                     </div>
-                    @endif
+
 
                     <div class="mb-5 relative">
                         <textarea class="w-full" name="body" id="body" rows="10" placeholder="Your world here..."></textarea>

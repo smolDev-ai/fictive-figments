@@ -63,7 +63,7 @@ class ThreadController extends Controller
         $createSlugArr = explode(' ', $thread['title']);
         $slug = implode('-', $createSlugArr);
 
-        $thread['slug'] = $slug;
+        $thread['slug'] = preg_replace("#[[:punct:]]#", "", $slug);
 
         $id ? $thread['forum'] = (int) $id : $thread['forum'] = $request['forum'];
         $thread['created_on'] = new DateTime();
@@ -122,11 +122,8 @@ class ThreadController extends Controller
             Thread::create($outOfCharacter);
         }
 
-        if($thread['type']) {
-            return redirect("/forum/{$thread['forum']}/thread/$newThread->slug/$newThread->type");
-        } else {
-            return redirect("/forum/{$thread['forum']}/thread/$newThread->slug/");
-        }
+
+        return redirect("/forum/$newThread->forum/thread/$newThread->slug/$newThread->type");
     }
 
     /**
@@ -137,8 +134,7 @@ class ThreadController extends Controller
      */
     public function show($forum_id, $thread_slug, $thread_type = null)
     {
-
-        $thread = $thread_type ? Thread::where('slug', $thread_slug)->where('type', $thread_type)->first() : Thread::where('slug', $thread_slug)->where('forum', $forum_id)->first();
+        $thread = Thread::where('slug', $thread_slug)->where('type', $thread_type)->first();
         return view('threads.show', [
             'thread' => $thread,
         ]);
@@ -175,38 +171,32 @@ class ThreadController extends Controller
      */
     public function destroy($forum, $thread_slug)
     {
-        
         $threads = Thread::where("slug", $thread_slug)->get();
         $nonRP = null;
         $thread_author = $threads[0]->author;
-        foreach($threads as $thread) {
+        foreach ($threads as $thread) {
             $this->authorize('delete', $thread);
-            if($thread->type) {
-                if($thread->post_count() > 0) {
-                    foreach($thread->posts as $post) {
+            if ($thread->type) {
+                if ($thread->post_count() > 0) {
+                    foreach ($thread->posts as $post) {
                         $post_author = $post->author;
                         $post->delete();
                         User::find($post_author)->decrementPostCount();
-    
                     }
                 }
                 $thread->delete();
-
             } else {
-                $nonRP = $nonRP ?: $thread;
+                $nonRP = $nonRP ? $thread : null;
                 break;
             }
-
-            
         }
 
-        if(isset($nonRP)) {
-            if($nonRP->post_count() > 0) {
-                foreach($thread->posts as $post) {
+        if (isset($nonRP)) {
+            if ($nonRP->post_count() > 0) {
+                foreach ($thread->posts as $post) {
                     $post_author = $post->author;
                     $post->delete();
                     User::find($post_author)->decrementPostCount();
-
                 }
                 User::find($nonRP->author)->decrementPostCount();
                 $nonRP->delete();
@@ -214,5 +204,7 @@ class ThreadController extends Controller
         }
 
         User::find($thread_author)->decrementPostCount();
+        session()->flash('success', "Thread deleted!");
+        return redirect("/forum/" . request()->id);
     }
 }
