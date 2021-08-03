@@ -35,6 +35,9 @@ Route::post('/forum', [ThreadController::class, 'store']);
 Route::post('/forum/{id}', [ThreadController::class, 'store']);
 Route::get('/forum/{id}', [ForumController::class, 'show']);
 Route::get('/forum/{forum_id}/thread/{thread_slug}/{thread_type}', [ThreadController::class, 'show']);
+Route::get('/forum/{forum_id}/thread/{thread_slug}', [ThreadController::class, 'show']);
+Route::delete('/forum/{forum_id}/thread/{thread_slug}/delete', [ThreadController::class, 'destroy']);
+Route::delete('/forum/{forum_id}/thread/{thread_slug}/{thread_type}/delete', [ThreadController::class, 'destroy']);
 Route::post('/forum/{forum_id}/thread/{thread_slug}/{thread_type}/reply', [PostController::class, 'store']);
 
 

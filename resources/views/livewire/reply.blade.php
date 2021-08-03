@@ -1,14 +1,27 @@
     <div class="container mx-auto my-5">
         <div class="bg-white lg:mt-10 lg:flex lg:flex-col border-2 px-4 py-5 shadow-lg">    
             <div class="mb-10">
-                <div>
-                    <ul class="flex flex-row space-x-10">
-                            <li><a class="text-purple-600 hover:text-purple-900 hover:underline" href="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/ic">{{strtoupper('ic')}}</a> {{$thread->getICPostCount()}}</li>
-                            <li><a class="text-purple-600 hover:text-purple-900 hover:underline" href="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/ooc">{{strtoupper('ooc')}}</a> {{$thread->getOOCPostCount()}}</li>
-                            <li><a class="text-purple-600 hover:text-purple-900 hover:underline" href="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/char">{{strtoupper('char')}}</a> {{$thread->getCharPostCount()}}</li>
-                    </ul>
-                </div>
+                @if($thread->type)
+                    @include('partials._threadTabs')
+                @endif
                 <h1 class="font-bold text-black-500 text-xl">{{$thread->trimTitle()}}</h1>
+                @auth
+                    @can('delete', $thread)
+                        @if($thread->type)
+                        <form method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/{{$thread->type}}/delete">
+                            @csrf
+                            @method('DELETE')
+                            <button class="text-purple-600 hover:text-purple-900 hover:underline">Delete</button>
+                        </form>
+                        @else
+                        <form method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/delete">
+                            @csrf
+                            @method('DELETE')
+                            <button class="text-purple-600 hover:text-purple-900 hover:underline">Delete</button>
+                        </form>
+                        @endif
+                    @endcan
+                @endauth
                 <hr />
                 <p>{{$thread->creator->username}}</p>
                 <p class="mt-5 mb-10">@bb($thread->body)</p>

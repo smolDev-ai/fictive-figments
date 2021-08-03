@@ -20,7 +20,7 @@ class CreateThreadsTable extends Migration
             $table->string('slug')->nullable();
             $table->mediumText("body")->nullable();
             $table->foreignId("author")->constrained("users")->onUpdate("cascade")->onDelete("cascade");
-            $table->foreignId("forum")->constrained("forums")->onUpdate("cascade")->onDelete("cascade");
+            $table->foreignId("forum")->constrained("forums")->onUpdate("cascade");
             $table->enum('type', ['ic', 'ooc', 'char'])->nullable();
             $table->boolean("is_locked")->default(false);
             $table->boolean("is_sticky")->default(false);
