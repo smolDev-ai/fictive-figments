@@ -5,19 +5,23 @@ namespace App\Http\Livewire;
 use App\Models\Post;
 use DateTime;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Reply extends Component
 {
+    use WithPagination;
     public $thread;
-    public $posts;
     public $body;
+    public $posts;
     public $update;
-    public $trimmedTitle;
+
+    public function mount()
+    {
+        $this->posts = $this->thread->posts;
+    }
 
     public function submitForm()
     {
-        $this->posts = $this->thread->posts;
-
         $post = [
                 "body" => $this->body,
                 "thread_id" => $this->thread->id,
@@ -42,6 +46,8 @@ class Reply extends Component
 
     public function render()
     {
-        return view('livewire.reply');
+        return view('livewire.reply', [
+            "content" => $this->thread->posts()->oldest()->paginate(15)
+        ]);
     }
 }

@@ -2,25 +2,29 @@
         <div class="bg-white lg:mt-10 lg:flex lg:flex-col border-2 px-4 py-5 shadow-lg">    
             <div class="mb-10">
                 <div>
-                    <ul>
-    
-                            <li><a href="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/ic">{{strtoupper('ic')}}</a> {{$thread->getICPostCount()}}</li>
-                            <li><a href="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/ooc">{{strtoupper('ooc')}}</a> {{$thread->getOOCPostCount()}}</li>
-                            <li><a href="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/char">{{strtoupper('char')}}</a> {{$thread->getCharPostCount()}}</li>
+                    <ul class="flex flex-row space-x-10">
+                            <li><a class="text-purple-600 hover:text-purple-900 hover:underline" href="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/ic">{{strtoupper('ic')}}</a> {{$thread->getICPostCount()}}</li>
+                            <li><a class="text-purple-600 hover:text-purple-900 hover:underline" href="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/ooc">{{strtoupper('ooc')}}</a> {{$thread->getOOCPostCount()}}</li>
+                            <li><a class="text-purple-600 hover:text-purple-900 hover:underline" href="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/char">{{strtoupper('char')}}</a> {{$thread->getCharPostCount()}}</li>
                     </ul>
                 </div>
-                <h1 class="font-bold text-black-500 text-xl">{{$trimmedTitle}}</h1>
+                <h1 class="font-bold text-black-500 text-xl">{{$thread->trimTitle()}}</h1>
                 <hr />
                 <p>{{$thread->creator->username}}</p>
                 <p class="mt-5 mb-10">@bb($thread->body)</p>
                     <hr />
-                @foreach($posts as $post)
+                @foreach($content as $post)
                     <div class="flex flex-row">
                         <p class="mb-10">@bb($post->body)</p>
                         <p>{{$post->creator->username}}</p>
                     </div>
                 @endforeach
             </div>
+            @if(count($content) <= 1)
+            
+            @else
+            {{$content->links()}}
+            @endif
             @auth
                 <form wire:submit.prevent="submitForm" method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/{{$thread->type}}/reply">
                     @csrf

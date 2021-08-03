@@ -17,6 +17,9 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function index()
     {
         //
@@ -131,7 +134,6 @@ class ThreadController extends Controller
         $thread = Thread::where('slug', $thread_slug)->where('type', $thread_type)->first();
         return view('threads.show', [
             'thread' => $thread,
-            "trimmedTitle" => $thread->trimTitle(),
         ]);
     }
 

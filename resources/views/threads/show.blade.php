@@ -1,3 +1,3 @@
-<x-layout title="{{$trimmedTitle}}">
-<livewire:reply :thread="$thread" :posts="$thread->posts" :trimmedTitle="$trimmedTitle" />
+<x-layout title="{{$thread->trimTitle()}}">
+<livewire:reply :thread="$thread" />
 </x-layout>
