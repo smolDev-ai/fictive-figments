@@ -13,7 +13,7 @@ class UserNotificationController extends Controller
 
     public function index()
     {
-        //
+        auth()->user()->unreadNotifications;
     }
 
     public function show()
@@ -21,8 +21,8 @@ class UserNotificationController extends Controller
         //
     }
 
-    public function destroy()
+    public function destroy($notificationId)
     {
-        //
+        auth()->user()->notifications->findOrFail($notificationId)->markAsRead();
     }
 }

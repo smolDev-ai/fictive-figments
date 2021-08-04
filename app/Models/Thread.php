@@ -65,14 +65,14 @@ class Thread extends Model
         return Thread::where('type', 'char')->where('title', 'char_' . $this->trimTitle())->first()->post_count();
     }
 
-    public function subscrptions()
+    public function subscriptions()
     {
-        return $this->hasMany(ThreadSubscription::class);
+        return $this->hasMany(ThreadSubscription::class, 'thread_id');
     }
 
     public function subscribe()
     {
-        return $this->subscrptions()->create([
+        return $this->subscriptions()->create([
             "user_id" => auth()->user()->id,
             "thread_id" => $this->id,
         ]);
@@ -80,11 +80,11 @@ class Thread extends Model
 
     public function unsubscribe()
     {
-        return $this->subscrptions()->where('user_id', auth()->user()->id)->delete();
+        return $this->subscriptions()->where('user_id', auth()->user()->id)->delete();
     }
 
     public function getisSubscribedAttribute()
     {
-        return $this->subscrptions()->where("user_id", auth()->user()->id)->exists();
+        return auth()->user() ? $this->subscriptions()->where("user_id", auth()->user()->id)->exists() : false;
     }
 }

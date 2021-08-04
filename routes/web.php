@@ -83,4 +83,4 @@ Route::get('/profile/{slugified_user}', [ProfileController::class, 'show']);
 Route::get("/me", [ProfileController::class, 'me']);
 Route::get("/me/notifications", [UserNotificationController::class, 'index']);
 Route::get("/me/notifications/{notificationId}", [UserNotificationController::class, 'show']);
-Route::("/me/notifications/{notificationId}", [UserNotificationController::class, 'destroy']);
+Route::delete("/me/notifications/{notificationId}", [UserNotificationController::class, 'destroy']);

@@ -10,15 +10,18 @@ use Illuminate\Notifications\Notification;
 class ThreadReply extends Notification
 {
     use Queueable;
+    protected $post;
+    protected $thread;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($thread, $post)
     {
-        //
+        $this->thread = $thread;
+        $this->post = $post;
     }
 
     /**
@@ -55,6 +58,20 @@ class ThreadReply extends Notification
     public function toArray($notifiable)
     {
         return [
+
+        ];
+    }
+
+    public function toDatabase($notifiable)
+    {
+        return [
+            'type' => 'new_post',
+            'reply' => $this->post->id,
+            'author' => $this->post->author,
+            'threadLink' => "/forum/{$this->thread->forum}/{$this->thread->slug}/{$this->thread->type}",
+            'replyLink' => "/forum/{$this->thread->forum}/{$this->thread->slug}/{$this->thread->type}#{$this->post->id}/",
+            'message' => $this->post->author . " replied to " . $this->thread->title
+
 
         ];
     }
