@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Post;
+use App\Notifications\ThreadReply;
 use DateTime;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -36,6 +37,10 @@ class Reply extends Component
 
         $this->resetForm();
         $newPost ? $this->posts = [...$this->posts, $newPost] : "";
+
+        $this->thread->subscriptions->filter(function ($sub) use ($newPost) {
+            return $sub->user_id !== $newPost->author;
+        })->each->notify($newPost);
     }
 
     private function resetForm()

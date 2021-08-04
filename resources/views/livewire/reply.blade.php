@@ -21,6 +21,8 @@
                             </form>
                         @endif
                     @endcan
+                    <livewire:subscription :thread="$thread" :subscribed="$thread->isSubscribed" />
+                   
                 @endauth
                 <hr />
                 <p>{{$thread->creator->username}}</p>

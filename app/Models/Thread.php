@@ -22,6 +22,7 @@ class Thread extends Model
 
 
     protected $with = ['creator'];
+    protected $appends = ['isSubscribed'];
 
     public function forum()
     {
@@ -62,5 +63,28 @@ class Thread extends Model
     public function getCharPostCount()
     {
         return Thread::where('type', 'char')->where('title', 'char_' . $this->trimTitle())->first()->post_count();
+    }
+
+    public function subscrptions()
+    {
+        return $this->hasMany(ThreadSubscription::class);
+    }
+
+    public function subscribe()
+    {
+        return $this->subscrptions()->create([
+            "user_id" => auth()->user()->id,
+            "thread_id" => $this->id,
+        ]);
+    }
+
+    public function unsubscribe()
+    {
+        return $this->subscrptions()->where('user_id', auth()->user()->id)->delete();
+    }
+
+    public function getisSubscribedAttribute()
+    {
+        return $this->subscrptions()->where("user_id", auth()->user()->id)->exists();
     }
 }

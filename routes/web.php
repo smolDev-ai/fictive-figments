@@ -7,7 +7,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ThreadController;
+use App\Http\Controllers\UserNotificationController;
 use App\Models\Category;
+use App\Models\ThreadSubscription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -29,14 +31,23 @@ Route::get('/', function () {
 
 
 Route::get('/forum', [CategoryController::class, 'index']);
-Route::get('/thread/create', [ThreadController::class, 'create']);
+Route::get('/forum/{id}', [ForumController::class, 'show']);
+
+
 Route::get('/forum/{id}/thread/create', [ThreadController::class, 'forumThread']);
+Route::get('/thread/create', [ThreadController::class, 'create']);
 Route::post('/forum', [ThreadController::class, 'store']);
 Route::post('/forum/{id}', [ThreadController::class, 'store']);
-Route::get('/forum/{id}', [ForumController::class, 'show']);
+
+Route::post('/forum/{forum_id}/thread/{thread_slug}/subscribe', [ThreadSubscriptionController::class, 'store'])->middleware('auth');
+Route::delete('/forum/{forum_id}/thread/{thread_slug}/unsubscribe', [ThreadSubscriptionController::class, 'store'])->middleware('auth');
+
 Route::get('/forum/{forum_id}/thread/{thread_slug}/{thread_type}', [ThreadController::class, 'show']);
 Route::get('/forum/{forum_id}/thread/{thread_slug}', [ThreadController::class, 'show']);
 Route::delete('/forum/{forum_id}/thread/{thread_slug}/{thread_type}/delete', [ThreadController::class, 'destroy']);
+
+
+
 Route::post('/forum/{forum_id}/thread/{thread_slug}/{thread_type}/reply', [PostController::class, 'store']);
 Route::post('/forum/{forum_id}/thread/{thread_slug}/reply', [PostController::class, 'store']);
 
@@ -70,3 +81,6 @@ Route::get('/profile/{slugified_user}', [ProfileController::class, 'show']);
 
 
 Route::get("/me", [ProfileController::class, 'me']);
+Route::get("/me/notifications", [UserNotificationController::class, 'index']);
+Route::get("/me/notifications/{notificationId}", [UserNotificationController::class, 'show']);
+Route::("/me/notifications/{notificationId}", [UserNotificationController::class, 'destroy']);

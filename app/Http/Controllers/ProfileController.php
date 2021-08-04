@@ -33,6 +33,9 @@ class ProfileController extends Controller
     public function show($slugified_user)
     {
         $user = User::where('slugified_user', $slugified_user)->first();
+        if ($user->username === auth()->user()->username) {
+            return redirect('/me');
+        }
         $allContent = $user->threads->merge($user->posts)->sortByDesc('created_at');
 
         return view('profile.show', [
@@ -43,7 +46,7 @@ class ProfileController extends Controller
 
     public function me()
     {
-        $user = User::where('username', request()->user()->username)->first();
+        $user = User::where('username', auth()->user()->username)->first();
         $allContent = $user->threads->merge($user->posts)->sortByDesc('created_at');
 
         return view('profile.show', [
