@@ -13,10 +13,10 @@ class CreateMessageParticipantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('message_participants', function (Blueprint $table) {
+        Schema::create('message__participants', function (Blueprint $table) {
             $table->primary(["pm_id", "participant_id"]);
             $table->timestamps();
-            $table->foreignId("pm_id")->constrained("private_messages")->onUpdate("cascade")->onDelete("cascade");
+            $table->foreignId("pm_id")->constrained("private__messages")->onUpdate("cascade")->onDelete("cascade");
             $table->foreignId("participant_id")->constrained("users")->onUpdate("cascade")->onDelete("cascade");
         });
     }
@@ -28,6 +28,6 @@ class CreateMessageParticipantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('message_participants');
+        Schema::dropIfExists('message__participants');
     }
 }

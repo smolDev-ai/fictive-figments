@@ -4,20 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\PMPost;
-use App\Models\User;
 
 class Private_Message extends Model
 {
     use HasFactory;
+
+    protected $with = [
+        "author"
+    ];
 
     public function posts()
     {
         return $this->hasMany(PMPost::class);
     }
 
-    public function creator()
+    public function author()
     {
-        return $this->bleongsTo(User::class, "creator");
+        return $this->belongsTo(User::class, "creator");
+    }
+
+    public function participants()
+    {
+        return $this->hasMany(Message_Participant::class, 'pm_id');
     }
 }

@@ -13,10 +13,11 @@ class CreatePrivateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('private_messages', function (Blueprint $table) {
+        Schema::create('private__messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId("creator")->constrained("users")->onUpdate("cascade")->onDelete("cascade");
             $table->string("title");
+            $table->mediumText("body");
             $table->timestamps();
         });
     }
