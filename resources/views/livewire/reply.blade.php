@@ -30,7 +30,7 @@
                     <hr />
                 @foreach($content as $post)
                     <div class="flex flex-row">
-                        <p class="mb-10">@bb($post->body)</p>
+                        <p class="mb-10" id={{$post->id}}>@bb($post->body)</p>
                         <p>{{$post->creator->username}}</p>
                     </div>
                 @endforeach

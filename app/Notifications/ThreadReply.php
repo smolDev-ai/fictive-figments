@@ -66,13 +66,11 @@ class ThreadReply extends Notification
     {
         return [
             'type' => 'new_post',
-            'reply' => $this->post->id,
-            'author' => $this->post->author,
-            'threadLink' => "/forum/{$this->thread->forum}/{$this->thread->slug}/{$this->thread->type}",
-            'replyLink' => "/forum/{$this->thread->forum}/{$this->thread->slug}/{$this->thread->type}#{$this->post->id}/",
-            'message' => $this->post->author . " replied to " . $this->thread->title
-
-
+            'thread' => $this->thread->trimTitle(),
+            "author" => $this->post->creator->username,
+            "profileLink" => "/profile/{$this->post->creator->slugified_user}",
+            'threadLink' => "/forum/{$this->thread->forum}/thread/{$this->thread->slug}/{$this->thread->type}",
+            'replyLink' => "/forum/{$this->thread->forum}/thread/{$this->thread->slug}/{$this->thread->type}#{$this->post->id}",
         ];
     }
 }

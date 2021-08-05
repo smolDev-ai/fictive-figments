@@ -13,7 +13,9 @@ class UserNotificationController extends Controller
 
     public function index()
     {
-        auth()->user()->unreadNotifications;
+        return view('profile.notifications', [
+            "all" => auth()->user()->notifications
+        ]);
     }
 
     public function show()

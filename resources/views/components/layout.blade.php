@@ -35,6 +35,9 @@
                         <a class="text-blue-500 hover:text-blue-800 text-lg" href={{"/admin/create/forum"}}>Create A Forum</a>
                     </li>  
                 @endif
+                
+                        <livewire:notifications />
+                        
                 <li class="mr-6">
                     <a class="text-blue-500 hover:text-blue-800 text-lg" href="/me">{{Auth::user()->username}}</a>
                 </li>
