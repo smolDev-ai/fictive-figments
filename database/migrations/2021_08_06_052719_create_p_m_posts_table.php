@@ -13,11 +13,11 @@ class CreatePMPostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pm_posts', function (Blueprint $table) {
+        Schema::create('p_m_posts', function (Blueprint $table) {
             $table->id();
             $table->timestamp("posted_on");
             $table->mediumText("content");
-            $table->foreignId("pm_id")->constrained("private_messages")->onUpdate("cascade")->onDelete("cascade");
+            $table->foreignId("pm_id")->constrained("private__messages")->onUpdate("cascade")->onDelete("cascade");
             $table->foreignId("author")->constrained("users")->onUpdate("cascade")->onDelete("cascade");
         });
     }
@@ -29,6 +29,6 @@ class CreatePMPostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('p_m-_posts');
+        Schema::dropIfExists('p_m_posts');
     }
 }

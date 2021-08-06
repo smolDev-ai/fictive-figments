@@ -18,6 +18,7 @@ class CreatePrivateMessagesTable extends Migration
             $table->foreignId("creator")->constrained("users")->onUpdate("cascade")->onDelete("cascade");
             $table->string("title");
             $table->mediumText("body");
+            $table->string('slug');
             $table->timestamps();
         });
     }

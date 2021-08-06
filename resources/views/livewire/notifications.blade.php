@@ -21,14 +21,15 @@
                             </p>
                             @endif
             @foreach($notifications as $notification)
-                @if(request()->path() === ltrim($notification->data['threadLink'], '/'))
-                    {{$notification->markAsRead()}}
-                    
-                @endif
-                <a wire:click.prevent="$emit('markNotificationAsRead', '{{$notification->id}}')" href="{{$notification->data['replyLink']}}" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
+               
+                <a wire:click.prevent="$emit('markNotificationAsRead', '{{$notification->id}}')" href="{{$notification->data['messageLink']}}" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
                     <img class="h-8 w-8 rounded-full object-cover mx-1" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar">
                     <p class="text-gray-600 text-sm mx-2">
-                        <span class="font-bold" href="{{$notification->data['profileLink']}}">{{$notification->data['author']}}</span> replied to <span class="font-bold text-blue-500" href="{{$notification->data['threadLink']}}">{{$notification->data['thread']}}</span> {{$notification->created_at->diffForHumans()}} 
+                        @if($notification->data['messageLink'])
+                        <span class="font-bold" href="{{$notification->data['profileLink']}}">{{$notification->data['author']}}</span> {{$notification->data['message']}} <span class="font-bold text-blue-500" href="{{$notification->data['messageLink']}}">abc</span> {{$notification->created_at->diffForHumans()}} 
+                        @else
+                            <span class="font-bold" href="{{$notification->data['profileLink']}}">{{$notification->data['author']}}</span> replied to <span class="font-bold text-blue-500" href="{{$notification->data['threadLink']}}">{{$notification->data['thread']}}</span> {{$notification->created_at->diffForHumans()}} 
+                        @endif
                     </p>
                 </a>
             @endforeach

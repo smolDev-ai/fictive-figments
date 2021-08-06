@@ -10,6 +10,7 @@ use App\Models\Thread;
 use App\Models\Post;
 use App\Models\PMPost;
 use App\Models\Private_Message;
+use App\Notifications\PrivateMessage;
 
 class User extends Authenticatable
 {

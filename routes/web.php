@@ -80,6 +80,7 @@ Route::group(["prefix" => "admin", "middleware" => "isStaff"], function () {
 
 
 Route::get('/profile/{slugified_user}', [ProfileController::class, 'show']);
+Route::get('/profile/{slugified_user}/private-message', [PrivateMessageController::class, 'create']);
 
 
 Route::get("/me", [ProfileController::class, 'me']);
@@ -87,3 +88,5 @@ Route::get("/me/notifications", [UserNotificationController::class, 'index']);
 Route::get("/me/notifications/{notificationId}", [UserNotificationController::class, 'show']);
 Route::delete("/me/notifications/{notificationId}", [UserNotificationController::class, 'destroy']);
 Route::get('/me/private-messages', [PrivateMessageController::class, 'index']);
+Route::get('/me/private-message', [PrivateMessageController::class, 'create']);
+Route::post('/private-messages', [PrivateMessageController::class, 'store']);

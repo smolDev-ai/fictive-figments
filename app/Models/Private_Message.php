@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\PrivateMessage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +13,8 @@ class Private_Message extends Model
     protected $with = [
         "author"
     ];
+
+    protected $guarded = [];
 
     public function posts()
     {

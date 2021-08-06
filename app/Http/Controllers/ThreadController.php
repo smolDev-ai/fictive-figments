@@ -72,6 +72,7 @@ class ThreadController extends Controller
 
         if ($forumCheck->category->is_rp) {
             $newThread = Thread::create($thread);
+            $newThread->subscribe();
             if ($newThread->type === 'ooc') {
                 $newThread->title = 'ooc_' . $thread['title'];
                 $newThread->save();
@@ -94,8 +95,8 @@ class ThreadController extends Controller
                 "created_on" => new DateTime()
             ];
 
-                Thread::create($characters);
-                Thread::create($InCharacter);
+                Thread::create($characters)->subscribe();
+                Thread::create($InCharacter)->subscribe();
             } elseif ($newThread->type === 'ic') {
                 $newThread->title = 'ic_' . $thread['title'];
                 $newThread->save();
@@ -118,12 +119,16 @@ class ThreadController extends Controller
                 "created_on" => new DateTime()
             ];
 
-                Thread::create($characters);
-                Thread::create($outOfCharacter);
+                Thread::create($characters)->subscribe();
+                Thread::create($outOfCharacter)->subscribe();
             }
         } else {
             $newThread = Thread::create($thread);
+            $newThread->subscribe();
         }
+
+
+
 
         $request->user()->incrementPostCount();
 
