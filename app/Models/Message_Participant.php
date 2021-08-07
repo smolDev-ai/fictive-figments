@@ -12,6 +12,10 @@ class Message_Participant extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'pm' => 'string'
+    ];
+
     public function participant()
     {
         return $this->belongsTo(User::class, "participant_id");

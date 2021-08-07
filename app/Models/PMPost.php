@@ -10,13 +10,21 @@ class PMPost extends Model
     use HasFactory;
     protected $guarded = [];
 
+    protected $casts = [
+        'pm_id' => 'string'
+    ];
+
+    protected $with = [
+        "creator"
+    ];
+
     public function pm()
     {
-        $this->belongsTo(Private_Message::class, "pm_id");
+        return $this->belongsTo(Private_Message::class, "pm_id");
     }
 
-    public function author()
+    public function creator()
     {
-        $this->belongsTo(User::class, "author");
+        return $this->belongsTo(User::class, "author");
     }
 }

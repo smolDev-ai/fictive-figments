@@ -16,7 +16,8 @@ class CreateMessageParticipantsTable extends Migration
         Schema::create('message__participants', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId("pm_id")->constrained("private__messages")->onUpdate("cascade")->onDelete("cascade");
+            $table->uuid("pm_id");
+            $table->foreign('pm_id')->references('id')->on("private__messages")->onUpdate("cascade")->onDelete("cascade");
             $table->foreignId("participant_id")->constrained("users")->onUpdate("cascade")->onDelete("cascade");
         });
     }

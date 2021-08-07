@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PMPostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PrivateMessageController;
 use App\Http\Controllers\ProfileController;
@@ -88,5 +89,7 @@ Route::get("/me/notifications", [UserNotificationController::class, 'index']);
 Route::get("/me/notifications/{notificationId}", [UserNotificationController::class, 'show']);
 Route::delete("/me/notifications/{notificationId}", [UserNotificationController::class, 'destroy']);
 Route::get('/me/private-messages', [PrivateMessageController::class, 'index']);
+Route::get('/me/private-messages/{id}', [PrivateMessageController::class, 'show']);
 Route::get('/me/private-message', [PrivateMessageController::class, 'create']);
 Route::post('/private-messages', [PrivateMessageController::class, 'store']);
+Route::post('/me/private-messages/{id}/reply', [PMPostController::class, 'store']);

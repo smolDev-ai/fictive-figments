@@ -17,7 +17,9 @@ class CreatePMPostsTable extends Migration
             $table->id();
             $table->timestamp("posted_on");
             $table->mediumText("content");
-            $table->foreignId("pm_id")->constrained("private__messages")->onUpdate("cascade")->onDelete("cascade");
+            $table->timestamps();
+            $table->uuid("pm_id");
+            $table->foreign('pm_id')->references('id')->on("private__messages")->onUpdate("cascade")->onDelete("cascade");
             $table->foreignId("author")->constrained("users")->onUpdate("cascade")->onDelete("cascade");
         });
     }

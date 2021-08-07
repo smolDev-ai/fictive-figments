@@ -62,12 +62,24 @@ class PrivateMessage extends Notification
 
     public function toDatabase($notifiable)
     {
-        return [
+        if (is_int($this->pm->author)) {
+            return [
+            "type" => "new_pm",
+            "author" => $this->pm->creator->username,
+            "title" => $this->pm->title,
+            "profileLink" => "/profile/{$this->pm->creator->slugified_user}",
+            "messageLink" => "/me/private-messages/{$this->pm->pm->id}#{$this->pm->id}",
+            "message" => " replied to message: "
+        ];
+        } else {
+            return [
             "type" => "new_pm",
             "author" => $this->pm->author->username,
+            "title" => $this->pm->title,
             "profileLink" => "/profile/{$this->pm->author->slugified_user}",
-            "messageLink" => "/me/private-messages/{$this->pm->slug}",
+            "messageLink" => "/me/private-messages/{$this->pm->id}",
             "message" => " sent you a message: "
         ];
+        }
     }
 }

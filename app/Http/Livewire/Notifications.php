@@ -13,7 +13,11 @@ class Notifications extends Component
     {
         auth()->user()->unreadNotifications->where('id', $notificationId)->markAsRead();
 
-        return redirect(auth()->user()->unreadNotifications->where('id', $notificationId)->first()->data['replyLink']);
+        if (auth()->user()->unreadNotifications->where('id', $notificationId)->first()->data['type'] === 'new_post') {
+            return redirect(auth()->user()->unreadNotifications->where('id', $notificationId)->first()->data['replyLink']);
+        } else {
+            return redirect(auth()->user()->unreadNotifications->where('id', $notificationId)->first()->data['messageLink']);
+        }
     }
 
     public function render()

@@ -49,7 +49,7 @@
                     <button class="w-32 bg-indigo-600 text-white p-3 rounded-md">Submit</button>
                 </form>
             @else
-                <form method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/reply">
+                <form wire:submit.prevent="submitForm" method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/reply">
                      @csrf
                     <x-input.tinymce wire:model="body" class="w-full" rows="10" placeholder="Want to Reply?"></x-input.tinymce>
                     <input wire:model="thread" type="hidden" name="thread" value={{$thread->id}}>
