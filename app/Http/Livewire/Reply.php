@@ -14,7 +14,11 @@ class Reply extends Component
     public $thread;
     public $body;
     public $posts;
-    public $update;
+    public $editingThread = false;
+    public $editingPost = false;
+    public $editingPostId;
+
+    protected $listeners = ['editPost'];
 
     public function mount()
     {
@@ -46,6 +50,12 @@ class Reply extends Component
     private function resetForm()
     {
         $this->body = '';
+    }
+
+    public function editPost($index)
+    {
+        $this->editingPost = true;
+        $this->editingPostId = $index;
     }
 
     public function render()
