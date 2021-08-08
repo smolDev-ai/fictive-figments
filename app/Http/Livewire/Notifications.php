@@ -15,8 +15,10 @@ class Notifications extends Component
 
         if (auth()->user()->unreadNotifications->where('id', $notificationId)->first()->data['type'] === 'new_post') {
             return redirect(auth()->user()->unreadNotifications->where('id', $notificationId)->first()->data['replyLink']);
-        } else {
+        } elseif (auth()->user()->unreadNotifications->where('id', $notificationId)->first()->data['type'] === 'new_pm') {
             return redirect(auth()->user()->unreadNotifications->where('id', $notificationId)->first()->data['messageLink']);
+        } else {
+            return redirect(auth()->user()->unreadNotifications->where('id', $notificationId)->first()->data['reportLink']);
         }
     }
 

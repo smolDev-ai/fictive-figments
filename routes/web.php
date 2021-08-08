@@ -8,8 +8,10 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PrivateMessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ThreadController;
 use App\Http\Controllers\UserNotificationController;
+use App\Http\Controllers\UserReportController;
 use App\Models\Category;
 use App\Models\Private_Message;
 use App\Models\ThreadSubscription;
@@ -77,6 +79,10 @@ Route::group(["prefix" => "admin", "middleware" => "isStaff"], function () {
     Route::post('/category', [CategoryController::class, 'store']);
 
     Route::post('/forum', [ForumController::class, 'store']);
+
+    Route::get('/reports', [UserReportController::class, 'index']);
+
+    Route::get('/report/{id}', [UserReportController::class, 'show']);
 });
 
 

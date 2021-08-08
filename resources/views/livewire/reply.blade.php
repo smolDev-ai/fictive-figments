@@ -6,6 +6,9 @@
                 @endif 
                 <h1 class="font-bold text-black-500 text-xl">{{$thread->trimTitle()}}</h1>
                 @auth
+                 @if(session()->has('success'))
+                    <div class="bg-green-500">{{session('success')}}</div>
+                @endif
                     @can('delete', $thread)
                         @if($thread->type)
                             <form method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/{{$thread->type}}/delete">
@@ -32,6 +35,9 @@
                     <div class="flex flex-row">
                         <p class="mb-10" id={{$post->id}}>@bb($post->body)</p>
                         <p>{{$post->creator->username}}</p>
+                        @auth
+                        <livewire:report :content="$post->body" :reportedUser="$post->author"/>
+                        @endauth
                     </div>
                 @endforeach
             </div>

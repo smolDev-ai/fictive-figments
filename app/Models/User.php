@@ -10,6 +10,7 @@ use App\Models\Thread;
 use App\Models\Post;
 use App\Models\PMPost;
 use App\Models\Private_Message;
+use App\Notifications\NewReport;
 use App\Notifications\PrivateMessage;
 
 class User extends Authenticatable
@@ -95,5 +96,10 @@ class User extends Authenticatable
                 return false;
             }
         }
+    }
+
+    public function newReport($report)
+    {
+        $this->notify(new NewReport($report));
     }
 }

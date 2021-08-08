@@ -18,7 +18,8 @@ class CreateUserReportsTable extends Migration
             $table->timestamps();
             $table->foreignId("reporting_user")->constrained("users")->onUpdate("cascade")->onDelete("cascade");
             $table->foreignId("reported_user")->constrained("users")->onUpdate("cascade")->onDelete("cascade");
-            $table->mediumText("report_comments");
+            $table->mediumText('reported_content');
+            $table->mediumText("report_comments")->nullable(true);
             $table->boolean("resolved")->default(false);
         });
     }
