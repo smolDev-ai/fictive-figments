@@ -35,8 +35,8 @@
                     <div class="flex flex-row">
                         <p class="mb-10" id={{$post->id}}>@bb($post->body)</p>
                         <p>{{$post->creator->username}}</p>
-                         @auth
-                        <livewire:report :content="$post->body" :reportedUser="$post->author" :wire:key="$post->id" />
+                        @auth
+                        <livewire:report :content="$post->body" :reportedUser="$post->author"/>
                         @endauth
                     </div>
                 @endforeach
