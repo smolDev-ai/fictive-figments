@@ -29,4 +29,9 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, "author");
     }
+
+    public function author_name()
+    {
+        return $this->author()->username;
+    }
 }
