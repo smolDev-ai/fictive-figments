@@ -45,7 +45,6 @@ class Reply extends Component
     private function resetForm()
     {
         $this->body = '';
-        $this->author = '';
     }
 
     public function render()
