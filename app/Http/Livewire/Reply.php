@@ -14,7 +14,7 @@ class Reply extends Component
     public $thread;
     public $body;
     public $posts;
-    public $update;
+    public $editingThread = false;
 
     public function mount()
     {
