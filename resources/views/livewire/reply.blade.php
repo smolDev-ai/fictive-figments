@@ -14,13 +14,13 @@
                             <form method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/{{$thread->type}}/delete">
                                 @csrf
                                 @method('DELETE')
-                                <button class="text-purple-600 hover:text-purple-900 hover:underline">Delete</button>
+                                <button type="submit" class="text-purple-600 hover:text-purple-900 hover:underline">Delete</button>
                             </form>
                         @else
                             <form method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->id}}/delete">
                                 @csrf
                                 @method('DELETE')
-                                <button class="text-purple-600 hover:text-purple-900 hover:underline">Delete</button>
+                                <button type="submit" class="text-purple-600 hover:text-purple-900 hover:underline">Delete</button>
                             </form>
                         @endif
                     @endcan
@@ -35,8 +35,8 @@
                     <div class="flex flex-row">
                         <p class="mb-10" id={{$post->id}}>@bb($post->body)</p>
                         <p>{{$post->creator->username}}</p>
-                        @auth
-                        <livewire:report :content="$post->body" :reportedUser="$post->author"/>
+                         @auth
+                        <livewire:report :content="$post->body" :reportedUser="$post->author" :wire:key="$post->id" />
                         @endauth
                     </div>
                 @endforeach
@@ -47,21 +47,11 @@
             {{$content->links()}}
             @endif
             @auth
-            @if($thread->type)
-                <form wire:submit.prevent="submitForm" method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/{{$thread->type}}/reply">
+                <form wire:submit.prevent="submitForm">
                     @csrf
                     <x-input.tinymce wire:model="body" class="w-full" rows="10" placeholder="Want to Reply?"></x-input.tinymce>
-                    <input wire:model="thread" type="hidden" name="thread" value={{$thread->id}}>
                     <button class="w-32 bg-indigo-600 text-white p-3 rounded-md">Submit</button>
                 </form>
-            @else
-                <form wire:submit.prevent="submitForm" method="POST" action="/forum/{{$thread->forum}}/thread/{{$thread->slug}}/reply">
-                     @csrf
-                    <x-input.tinymce wire:model="body" class="w-full" rows="10" placeholder="Want to Reply?"></x-input.tinymce>
-                    <input wire:model="thread" type="hidden" name="thread" value={{$thread->id}}>
-                    <button class="w-32 bg-indigo-600 text-white p-3 rounded-md">Submit</button>
-                </form>
-            @endif
             @endauth
             @guest
                 <p>You must be <a class="text-purple-600 hover:text-purple-900 hover:underline" href="/login">Logged in</a> to post.</p>

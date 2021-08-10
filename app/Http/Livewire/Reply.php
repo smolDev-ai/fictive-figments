@@ -30,13 +30,12 @@ class Reply extends Component
                 "posted_on" => new DateTime(),
             ];
 
-
         $newPost = Post::create($post);
 
         request()->user()->incrementPostCount();
 
         $this->resetForm();
-        $newPost ? $this->posts = [...$this->posts, $newPost] : "";
+        $newPost ? $this->posts = [...$this->posts, $newPost] : $this->posts;
 
         $this->thread->subscriptions->filter(function ($sub) use ($newPost) {
             return $sub->user_id !== $newPost->author;
@@ -46,6 +45,7 @@ class Reply extends Component
     private function resetForm()
     {
         $this->body = '';
+        $this->author = '';
     }
 
     public function render()
