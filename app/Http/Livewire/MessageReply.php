@@ -15,10 +15,22 @@ class MessageReply extends Component
     public $content;
     public $posts;
     public $participants;
+    public $editingPost;
+    public $editingPM;
+    public $postId;
+
+    public $listeners = [
+        'editPM',
+        'editPost',
+        'cancelPMEdit',
+        'cancelPostEdit'
+    ];
 
     public function mount()
     {
         $this->posts = $this->pm->posts;
+        $this->editingPost = false;
+        $this->editingPM = false;
     }
 
     public function submitForm()
@@ -45,6 +57,23 @@ class MessageReply extends Component
     {
         $this->content = '';
         $this->author = '';
+    }
+
+    public function editPM() {
+        $this->editingPM = true;
+    }
+
+    public function editPost($postId) {
+        $this->editingPost = true;
+        $this->postId = $postId;
+    }
+
+    public function cancelPMEdit($value) {
+        $this->editingPM = $value;
+    }
+
+    public function cancelPostEdit($value) {
+        $this->editingPost = $value;
     }
 
 

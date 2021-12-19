@@ -10,6 +10,9 @@
                  @if(session()->has('success'))
                     <div class="bg-green-500">{{session('success')}}</div>
                 @endif
+                @auth
+                    <livewire:report :content="$thread->body" :reportedUser="$thread->author" />
+                @endauth
                     @can('update', $thread)
                     <button wire:click="editThread" class="text-purple-600 hover:text-purple-900 hover:underline">
                         Edit

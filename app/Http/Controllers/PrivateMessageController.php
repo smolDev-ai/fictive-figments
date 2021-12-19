@@ -22,9 +22,15 @@ class PrivateMessageController extends Controller
 
     public function create()
     {
-        return view("profile.privateMessages.create", [
-            "username" => User::where('slugified_user', request()->slugified_user)->first()->username
-        ]);
+        if(request()->slugified_user !== null)
+            return view("profile.privateMessages.create", [
+                "username" => User::where('slugified_user', request()->slugified_user)->first()->username
+            ]);
+        else {
+            return view("profile.privateMessages.create", [
+                "username" => auth()->user()->username,
+            ]);
+        }
     }
 
     public function store(Request $request)

@@ -10,11 +10,34 @@
                 @endif
             </ul>
         @endforeach
-        <p>{{$pm->body}}</p>
-        @foreach($items as $post)
+        @if($editingPM === false)
+            @auth
+                <livewire:report :content="$pm->body" :reportedUser="$pm->creator"/>
+            @endauth
+            @can('update', $pm)
+                <button wire:click="$emit('editPM', '{{$pm->id}}')" class="text-purple-600 hover:text-purple-900 hover:underline">Edit</button>
+            @endcan
+            <p>{{$pm->body}}</p>
+        @else
+            <livewire:edit-private-message :editingPM="$editingPM" :pm="$pm" />
+        @endif
+        @foreach($items as $index => $post)
             <div class="flex flex-row">
-                <p class="mb-10" id={{$post->id}}>@bb($post->content)</p>
-                <p>{{$post->creator->username}}</p>
+                @if($editingPost === false || $index !== $postId)
+                        <p class="mb-10" id={{$post->id}}>@bb($post->content)</p>
+                        <p>{{$post->creator->username}}</p>
+                        @auth
+                            <livewire:report :content="$post->content" :reportedUser="$post->author" :wire:key="$index"/>
+                        @endauth
+                    @can('update', $post)
+                        <button wire:click="$emit('editPost', {{$index}})" class="text-purple-600 hover:text-purple-900 hover:underline" wire:key="{{$index}}">Edit</button>
+                    @endcan
+                @endif
+                @if($editingPost && $index === $postId)
+                    @can('update', $post)
+                        <livewire:edit-private-message :editingPost="$editingPost" :post="$post" />
+                    @endcan                        
+                @endif
             </div>
         @endforeach
         @if(count($items) <= 1)
