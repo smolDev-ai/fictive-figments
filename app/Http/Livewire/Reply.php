@@ -15,6 +15,14 @@ class Reply extends Component
     public $body;
     public $posts;
     public $editingThread = false;
+    public $editingPost = false;
+    public $postId;
+
+    protected $listeners = [
+        'editPost',
+        'cancelPostEdit',
+        'cancelThreadEdit'
+    ];
 
     public function mount()
     {
@@ -46,6 +54,25 @@ class Reply extends Component
     {
         $this->body = '';
     }
+
+    public function editThread() {
+        $this->editingThread = true;
+    }
+
+    public function editPost($postId)
+    {
+        $this->postId = $postId;
+        $this->editingPost = true;
+    }
+
+    public function cancelPostEdit($value) {
+        $this->editingPost = $value;
+    }
+
+    public function cancelThreadEdit($value) {
+        $this->editingThread = $value;
+    }
+
 
     public function render()
     {

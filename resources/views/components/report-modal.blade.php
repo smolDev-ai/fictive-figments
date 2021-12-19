@@ -6,7 +6,7 @@
             <!-- Modal -->
             <div x-show="showModal" class="bg-white rounded-xl shadow-2xl p-6 sm:w-10/12 mx-10" @click.away="showModal = false" x-transition:enter="transition ease duration-100 transform" x-transition:enter-start="opacity-0 scale-90 translate-y-1" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease duration-100 transform" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-90 translate-y-1">
                 <!-- Title -->
-                <span class="font-bold block text-2xl mb-3">🍺 {{$title}} </span>
+                <span class="font-bold block text-2xl mb-3">⚠️ {{$title}} </span>
                 <!-- Some beer 🍺 -->
                 <p class="mb-5">{{$body}}</p>
 

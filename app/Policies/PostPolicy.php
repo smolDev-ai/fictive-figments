@@ -53,7 +53,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $post->author = $user->id;
+        return $post->author === $user->id;
     }
 
     /**
