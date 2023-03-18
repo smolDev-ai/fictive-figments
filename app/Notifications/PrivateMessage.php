@@ -66,7 +66,7 @@ class PrivateMessage extends Notification
             return [
             "type" => "new_pm",
             "author" => $this->pm->creator->username,
-            "title" => $this->pm->title,
+            "title" => $this->pm->pm->title,
             "profileLink" => "/profile/{$this->pm->creator->slugified_user}",
             "messageLink" => "/me/private-messages/{$this->pm->pm->id}#{$this->pm->id}",
             "message" => " replied to message: "
