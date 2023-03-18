@@ -64,8 +64,8 @@ class MessageReply extends Component
     }
 
     public function editPost($postId) {
-        $this->editingPost = true;
         $this->postId = $postId;
+        $this->editingPost = true;
     }
 
     public function cancelPMEdit($value) {
