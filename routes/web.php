@@ -30,12 +30,7 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::get('/forum', [CategoryController::class, 'index']);
+Route::get('/', [CategoryController::class, 'index']);
 Route::get('/forum/{id}', [ForumController::class, 'show']);
 
 
@@ -78,7 +73,11 @@ Route::group(["prefix" => "admin", "middleware" => "isStaff"], function () {
 
     Route::post('/category', [CategoryController::class, 'store']);
 
+    Route::get('/categories', [CategoryController::class, 'list']);
+
     Route::post('/forum', [ForumController::class, 'store']);
+
+    Route::get('/forums', [ForumController::class, 'index']);
 
     Route::get('/reports', [UserReportController::class, 'index']);
 

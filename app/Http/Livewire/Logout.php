@@ -14,7 +14,7 @@ class Logout extends Component
         if (substr(url()->previous(), -3) == '/me') {
             return redirect("/profile/$user");
         } else {
-            return redirect(url()->previous());
+            return redirect('/');
         }
     }
 

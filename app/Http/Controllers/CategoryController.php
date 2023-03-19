@@ -19,6 +19,13 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function list()
+    {
+        return view('admin.category.index', [
+            "categories" => Category::all()
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
